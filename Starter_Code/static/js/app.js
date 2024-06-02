@@ -2,7 +2,6 @@
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
-    // get the metadata field
     // Filter the metadata for the object with the desired sample number
 var metadata = data.metadata.filter(obj => obj.id == sample)[0];
 
@@ -27,12 +26,8 @@ function buildCharts(sample) {
   //Filter sample data
   var sampleData = data.samples.filter(obj => obj.id == sample)[0];
 
-    // Get the samples field
-
-
+    // Get the top ten samples
     // Filter the samples for the object with the desired sample number
-
-
     // Get the otu_ids, otu_labels, and sample_values
   var otu_ids = sampleData.otu_ids.slice(0, 10).map(id => `OTU ${id}`).reverse();
     var otu_labels = sampleData.otu_labels.slice(0, 10).reverse();
@@ -40,9 +35,11 @@ function buildCharts(sample) {
 
     // Build a Bubble Chart
     var bubbleLayout = {
-      margin: { t: 0 },
-      hovermode: "closest",
-      xaxis: { title: "OTU ID" }
+      title: "Bacteria Cultures Per Sample",
+      yaxis: { title: "Number of Bacteria" },
+      xaxis: { title: "OTU ID" },
+      margin: { t: 50, b: 50 },
+      hovermode: "closest"
     };
 
     var bubbleData = [{
@@ -74,6 +71,9 @@ function buildCharts(sample) {
     }];
 
     var barLayout = {
+      title: "Top 10 Bacteria Cultures Found",
+      xaxis: { title: "Number of Bacteria" },
+      yaxis: { title: "OTU ID" },
       margin: { t: 30, l: 150 }
     };
 
