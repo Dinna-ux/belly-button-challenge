@@ -3,10 +3,10 @@ function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // Filter the metadata for the object with the desired sample number
-var metadata = data.metadata.filter(obj => obj.id == sample)[0];
+ metadata = data.metadata.filter(obj => obj.id == sample)[0];
 
     // Use d3 to select the panel with id of `#sample-metadata`
-var panel = d3.select("#sample-metadata");
+ panel = d3.select("#sample-metadata");
 
     // Use `.html("") to clear any existing metadata
 panel.html("");
@@ -24,17 +24,17 @@ function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
   //Filter sample data
-  var sampleData = data.samples.filter(obj => obj.id == sample)[0];
+  sampleData = data.samples.filter(obj => obj.id == sample)[0];
 
     // Get the top ten samples
     // Filter the samples for the object with the desired sample number
     // Get the otu_ids, otu_labels, and sample_values
-  var otu_ids = sampleData.otu_ids.slice(0, 10).map(id => `OTU ${id}`).reverse();
-    var otu_labels = sampleData.otu_labels.slice(0, 10).reverse();
-    var sample_values = sampleData.sample_values.slice(0, 10).reverse();
+  otu_ids = sampleData.otu_ids.slice(0, 10).map(id => `OTU ${id}`).reverse();
+  otu_labels = sampleData.otu_labels.slice(0, 10).reverse();
+    sample_values = sampleData.sample_values.slice(0, 10).reverse();
 
     // Build a Bubble Chart
-    var bubbleLayout = {
+    bubbleLayout = {
       title: "Bacteria Cultures Per Sample",
       yaxis: { title: "Number of Bacteria" },
       xaxis: { title: "OTU ID" },
@@ -42,7 +42,7 @@ function buildCharts(sample) {
       hovermode: "closest"
     };
 
-    var bubbleData = [{
+    bubbleData = [{
       x: sampleData.otu_ids,
       y: sampleData.sample_values,
       text: sampleData.otu_labels,
@@ -62,7 +62,7 @@ function buildCharts(sample) {
 
     // Build a Bar Chart
     // Don't forget to slice and reverse the input data appropriately
-    var barData = [{
+    barData = [{
       x: sample_values,
       y: otu_ids,
       text: otu_labels,
@@ -70,7 +70,7 @@ function buildCharts(sample) {
       orientation: "h"
     }];
 
-    var barLayout = {
+    barLayout = {
       title: "Top 10 Bacteria Cultures Found",
       xaxis: { title: "Number of Bacteria" },
       yaxis: { title: "OTU ID" },
@@ -88,10 +88,10 @@ function init() {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // Get the names field
-    var names = data.names;
+    names = data.names;
 
     // Use d3 to select the dropdown with id of `#selDataset`
-    var dropdownMenu = d3.select("#selDataset");
+    dropdownMenu = d3.select("#selDataset");
 
     // Use the list of sample names to populate the select options
     // Hint: Inside a loop, you will need to use d3 to append a new
@@ -102,7 +102,7 @@ function init() {
 
 
     // Get the first sample from the list
-    var firstSample = names[0];
+    firstSample = names[0];
 
     // Build charts and metadata panel with the first sample
     buildCharts(firstSample);
